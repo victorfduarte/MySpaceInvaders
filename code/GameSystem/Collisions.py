@@ -3,9 +3,6 @@ Este é o módulo do GameSystem que trabalha as colisões entre objetos
 '''
 
 
-from tokenize import group
-
-
 class Collisions:
     def __init__(self, pg):
         self.__pg = pg  # Uma referência para o framework Pygame
@@ -40,12 +37,19 @@ class Collisions:
                     groups[idx2].on_collision(groups[idx1])
 
 
-
-
     def sprite_groups(self, sprites: list, groups: list):
         '''Recebe uma lista de Sprites e uma de Grupos e verifica se há colisão entre
         Sprites com Grupos de Sprites\n'''
-        pass
+        for sprite1 in sprites:
+            gp_collision = False
+            for group in groups:
+                for sprite2 in group.getChildren():
+                    if self.collison(sprite1, sprite2):
+                        sprite1.on_collision(sprite2)
+                        sprite2.on_collision(sprite1)
+                        gp_collision = True
+                if gp_collision:
+                    group.on_collision(sprite1)
 
 
     def collison(self, obj1, obj2) -> bool:

@@ -7,9 +7,9 @@ class EnemiesGroup(SpriteInterface):
         self.__columns = columns
         self.__rows = rows 
     
-    def addEnemy(self, enemy: EnemyShip, column: int, row: int):
+    def addChild(self, enemy: EnemyShip, column: int, row: int):
         self.__enemies[row][column] = enemy
 
-    def getEnemies(self) -> list:
+    def getChildren(self) -> list:
         return self.__enemies
     
