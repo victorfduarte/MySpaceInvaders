@@ -1,27 +1,19 @@
-class Teste:
-    def metodo_dinamico(self, a, b) -> int:
-        '''Método Dinâmico\n
-        Recebe dois valores e retorna a sua soma'''
-        return a + b
-    
-    @staticmethod
-    def metodo_estatico(a, b) -> int:
-        '''Método Estático\n
-        Recebe dois valores e retorna a sua soma'''
-        return a + b
+objeto1 = [60, 50, 70, 50]
+objeto2 = [140, 80, 70, 50]
 
-var_a = 5
-var_b = 10
+collision = False
 
-test = Teste()
+def axes_collision(point1, dist1, point2, dist2):
+    if point1 < point2:
+        if point2 < (point1 + dist1):
+            return True
+        return False
 
-print(test.metodo_dinamico)
-print(Teste.metodo_dinamico)
+    elif objeto1[0] < (point2 + dist2):
+        return True
 
-'''
-print(test.metodo_dinamico(var_a, var_b))
-print(test.metodo_estatico(var_a, var_b))
+if axes_collision(objeto1[0], objeto1[2], objeto2[0], objeto2[2]):
+    collision = axes_collision(objeto1[1], objeto1[3], objeto2[1], objeto2[3])
 
-# print(Teste.metodo_dinamico(var_a, var_b))
-print(Teste.metodo_estatico(var_a, var_b))
-'''
+
+print(collision)

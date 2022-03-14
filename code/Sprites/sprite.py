@@ -8,6 +8,11 @@ class Sprite(SpriteInterface):
         self.__dimension = [0, 0]
         self.__image_scale = [0, 0]
     
+    def setup(self, position: int, dimention: int, img_scale: int):
+        self.__position = position
+        self.__dimension = dimention
+        self.__image_scale = img_scale
+    
     # Getters
     def getImage(self):
         return self.__image  
