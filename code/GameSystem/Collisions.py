@@ -2,21 +2,20 @@
 Este é o módulo do GameSystem que trabalha as colisões entre objetos
 '''
 
-from ..Sprites.sprite import MySprite
-from ..Sprites.group_sprites import MyGroupSprites
-import pygame
+from ..Sprites.Bases.sprite import MySprite
+from ..Sprites.Bases.group_sprites import MyGroupSprites
 
 class Collisions:
     '''Classe para fazer funcionar os tempos do jogo. Cria um objeto para ser único em
     todo o jogo. Possui as seguintes funções:\n
-    add_sprite(sprite: MySprite) -> None: Adiciona o sprite à lista de sprites a serem
-    renderizados\n
-    remove_sprite(sprite: MySprite) -> None: Remove o sprite da lista de sprites a serem
-    renderizados\n
+    add_sprite(sprite: MySprite) -> None: Adiciona o sprite à lista de sprites que podem
+    se colidir\n
+    remove_sprite(sprite: MySprite) -> None: Remove o sprite da lista de sprites que
+    podem se colidir\n
     add_group_sprites(group: MyGroupSprite) -> None: Adiciona o grupo de sprites à lista
-    de grupo de sprites a serem renderizados\n
+    de grupo de sprites que podem se colidir\n
     remove_group_sprites(sprite: MyGroupSprite) -> None: Remove o grupo de sprites de
-    lista de grupo de sprites a serem renderizados\n
+    lista de grupo de sprites que podem se colidir\n
     '''
     def __init__(self):
         self.__sprites: list[MySprite] = []

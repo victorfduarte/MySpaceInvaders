@@ -1,30 +1,24 @@
 # fazer todas as importações necessárias
-from turtle import Screen
 import pygame
-from GameSystem.input import Input
-from GameSystem.collisions import Collisions
-from GameSystem.timer import Timer
-from GameSystem.display import Display
-from Screens.screen_manager import ScreenManager
-# from Screens.screen_jogo import 
+from GameSystem import gSystem
+from Screens.screen import Screen
+from Screens.screen_jogo import ScreenJogo
+
 
 
 def main(*args):
     # Inicializar
     pygame.init()
+    gSystem.init(first_screen='jogo')
 
-    # Instanciar os objetos de Input, Colisão, Tempo e Saída
-    input_obj = Input()
-    collsion = Collisions()
-    timer = Timer()
-    display = Display()
-
-    # Criar as telas e o gerenciador
-    screen_manager = ScreenManager()
-    # menu_screen = 
+    # Cria uma lista com todas as telas do jogo
+    telas_jogo: list[Screen] = [ScreenJogo('jogo', gSystem)]
+    
+    for tela in telas_jogo:
+        gSystem.SCREEN_MANAGER.add_screen(tela)
 
     # Chamar o gerenciador de telas
-    screen_manager.__main__()
+    gSystem.SCREEN_MANAGER.__main__()
     pass
 
 

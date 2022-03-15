@@ -1,4 +1,5 @@
 import pygame
+import pygame.time
 
 
 class Timer:
@@ -14,6 +15,7 @@ class Timer:
     def __init__(self):
         self.__objs_update: list[function] = []
         self.__clocks: dict[Clock, list[function]]= {}
+        self.DELTA = pygame.time.get_ticks()
     
 
     def add_clock(self, time: int, func: function):
@@ -45,13 +47,15 @@ class Timer:
         '''Chama as funções que devem ser chamadas a todo momento e as funções que são
         executadas de tempos em tempos\n
         **Esta função faz parte do sistema e não deve ser chamada***'''
+        self.DELTA = pygame.time.get_ticks() - self.DELTA
+
         for func in self.__objs_update:
-            func()
+            func(self.DELTA)
         
         for clock, funcs in self.__clocks.items():
             if clock.check():
                 for func in funcs:
-                    func()
+                    func(self.DELTA)
 
 
 class Clock:

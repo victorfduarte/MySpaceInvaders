@@ -11,7 +11,7 @@ class MySprite(Sprite, SpriteInterface):
         self.rect = self.image.get_rect()
         self.__image_scale = [0, 0]
     
-    def setup(self, position: 'list[int]', dimention: 'list[int]', img_scale: int):
+    def setup(self, position: 'list[int]', dimention: 'list[int]', img_scale: int = [0,0]):
         self.rect.x = position[0]
         self.rect.y = position[1]
         self.rect.width = dimention[0]
@@ -23,10 +23,10 @@ class MySprite(Sprite, SpriteInterface):
     def getImage(self) -> pygame.Surface:
         return self.image  
 
-    def getPos(self) -> 'tuple[int]':
+    def getPos(self) -> 'tuple[int, int]':
         return (self.rect.x, self.rect.y)
 
-    def getDim(self) -> 'tuple[int]':
+    def getDim(self) -> 'tuple[int, int]':
         return (self.rect.width, self.rect.height)
 
     def getImgScale(self) -> list:
