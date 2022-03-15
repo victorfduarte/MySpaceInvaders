@@ -1,9 +1,30 @@
-from Screens import Screen
+# fazer todas as importações necessárias
+from turtle import Screen
+import pygame
+from GameSystem.input import Input
+from GameSystem.collisions import Collisions
+from GameSystem.timer import Timer
+from GameSystem.display import Display
+from Screens.screen_manager import ScreenManager
+# from Screens.screen_jogo import 
+
 
 def main(*args):
-    # checar inputs
-    # checar colisões
-    # atualizar a tela
+    # Inicializar
+    pygame.init()
+
+    # Instanciar os objetos de Input, Colisão, Tempo e Saída
+    input_obj = Input()
+    collsion = Collisions()
+    timer = Timer()
+    display = Display()
+
+    # Criar as telas e o gerenciador
+    screen_manager = ScreenManager()
+    # menu_screen = 
+
+    # Chamar o gerenciador de telas
+    screen_manager.__main__()
     pass
 
 

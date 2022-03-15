@@ -1,19 +1,49 @@
-objeto1 = [60, 50, 70, 50]
-objeto2 = [140, 80, 70, 50]
+'''import pygame
 
-collision = False
+pygame.init()
 
-def axes_collision(point1, dist1, point2, dist2):
-    if point1 < point2:
-        if point2 < (point1 + dist1):
-            return True
-        return False
+gameDisplay = pygame.display.set_mode((800, 600))
+clock = pygame.time.Clock()
 
-    elif objeto1[0] < (point2 + dist2):
-        return True
+crashed = False
 
-if axes_collision(objeto1[0], objeto1[2], objeto2[0], objeto2[2]):
-    collision = axes_collision(objeto1[1], objeto1[3], objeto2[1], objeto2[3])
+counter = pygame.time.get_ticks()
+time = 1000
+to_tick = False
 
+while not crashed:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            crashed = True            
 
-print(collision)
+        elif event.type == pygame.KEYDOWN:
+            counter = pygame.time.get_ticks()
+            to_tick = True
+            print('HI')
+        
+        elif event.type == pygame.KEYUP:
+            to_tick = False
+        
+        if to_tick:
+            now = pygame.time.get_ticks()
+            if now - counter >= time:
+                counter = now
+                print('HI')
+    
+    pygame.display.update()
+    clock.tick(500)
+'''
+
+def func1():
+    pass
+
+def func2():
+    pass
+
+def func3():
+    pass
+
+lista = [func1, func2, func3]
+
+for item in lista:
+    item
