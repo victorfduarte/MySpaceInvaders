@@ -1,49 +1,48 @@
-'''import pygame
+import pygame, sys
+from pygame.locals import *
+import pygame.time
 
 pygame.init()
 
-gameDisplay = pygame.display.set_mode((800, 600))
-clock = pygame.time.Clock()
+FPS = 30 # frames per second setting
+fpsClock = pygame.time.Clock()
 
-crashed = False
+# set up the window
+DISPLAYSURF = pygame.display.set_mode((400, 300), 0, 32)
+pygame.display.set_caption('Animation')
 
-counter = pygame.time.get_ticks()
-time = 1000
-to_tick = False
+WHITE = (255, 255, 255)
+catImg = pygame.image.load('resources/images/ship.png')
+catx = 10
+caty = 10
+direction = 'right'
 
-while not crashed:
+while True: # the main game loop
+    DISPLAYSURF.fill(WHITE)
+
+    if direction == 'right':
+        catx += 5
+        if catx == 280:
+            direction = 'down'
+    elif direction == 'down':
+        caty += 5
+        if caty == 220:
+            direction = 'left'
+    elif direction == 'left':
+        catx -= 5
+        if catx == 10:
+            direction = 'up'
+    elif direction == 'up':
+        caty -= 5
+        if caty == 10:
+            direction = 'right'
+
+    DISPLAYSURF.blit(catImg, (catx, caty))
+
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            crashed = True            
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
 
-        elif event.type == pygame.KEYDOWN:
-            counter = pygame.time.get_ticks()
-            to_tick = True
-            print('HI')
-        
-        elif event.type == pygame.KEYUP:
-            to_tick = False
-        
-        if to_tick:
-            now = pygame.time.get_ticks()
-            if now - counter >= time:
-                counter = now
-                print('HI')
-    
     pygame.display.update()
-    clock.tick(500)
-'''
-
-def func1():
-    pass
-
-def func2():
-    pass
-
-def func3():
-    pass
-
-lista = [func1, func2, func3]
-
-for item in lista:
-    item
+    fpsClock.tick(FPS)

@@ -8,7 +8,7 @@ from Screens.screen_jogo import ScreenJogo
 def main(*args):
     # Inicializar
     pygame.init()
-    gSystem.init()
+    gSystem.init(fps=60)
 
     # Cria uma lista com todas as telas do jogo
     telas_jogo: list[ScreenInterface] = [ScreenJogo('jogo', gSystem)]
@@ -18,6 +18,8 @@ def main(*args):
 
     # Chamar o gerenciador de telas
     gSystem.SCREEN_MANAGER.__main__('jogo')
+
+    pygame.quit()
     pass
 
 

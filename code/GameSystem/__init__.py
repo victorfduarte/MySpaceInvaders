@@ -13,7 +13,7 @@ class GSystem:
         self.SCREEN_MANAGER: ScreenManager = None
         
 
-    def init(self, width = 800, height = 600):
+    def init(self, width = 800, height = 600, fps = 60):
         '''Inicializa o sistema configurando a largura e altura da tela e o nome da
         primeira tela a aparecer no jogo
         '''
@@ -24,7 +24,8 @@ class GSystem:
         self.DISPLAY = Display()
         self.SCREEN_MANAGER = ScreenManager(self)
 
-        self.DISPLAY.__setup__(width, height)
+        self.DISPLAY.__setup__(width, height, fps)
+        
 
 
 gSystem = GSystem()

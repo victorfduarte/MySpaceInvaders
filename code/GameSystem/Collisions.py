@@ -26,12 +26,12 @@ class Collisions:
 
 
     def add_object(self, obj: CollisionInterface):
-        for content in obj.get_content():
+        for content in obj.get_collision_content():
             if content not in self.__objects:
                 self.__objects.append(content)
     
     def remove_object(self, obj: CollisionInterface):
-        for content in obj.get_content():
+        for content in obj.get_collision_content():
             if content in self.__objects:
                 self.__objects.remove(content)
 

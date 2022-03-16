@@ -1,49 +1,55 @@
 import pygame
 import pygame.image
-from pygame.sprite import Sprite
-from .sprite_interface import SpriteInterface
+from Interfaces.collision_interface import CollisionInterface
+from Interfaces.draw_interface import DrawInterface
 
-class MySprite(Sprite, SpriteInterface):
-    def __init__(self, name, image_path: str):
-        super().__init__()
+
+class MySprite(DrawInterface, CollisionInterface):
+    def __init__(self, name: str, image_path: str):
         self.name = name
         self.image = pygame.image.load(image_path)
         self.rect = self.image.get_rect()
         self.__image_scale = [0, 0]
     
-    def setup(self, position: 'list[int]', dimention: 'list[int]', img_scale: int = [0,0]):
-        self.rect.x = position[0]
-        self.rect.y = position[1]
-        self.rect.width = dimention[0]
-        self.rect.height = dimention[1]
-        self.__image_scale = img_scale
+
+    def get_draw_content(self) -> 'list[DrawInterface]':
+        '''Retorna a sua lista dos objetos a serem desenhados na tela\n
+        MySprite é um objeto simples, então retorna uma lista consigo mesmo
+        '''
+        return [self]
+    
+    def get_collision_content(self) -> 'list[CollisionInterface]':
+        '''Retorna o conteúdo para verificar a colisão\n
+        MySprite é um objeto simples, então retorna uma lista consigo mesmo
+        '''
+        return [self]
     
 
     # Getters
-    def getImage(self) -> pygame.Surface:
+    def get_image(self) -> pygame.Surface:
         return self.image  
 
-    def getPos(self) -> 'tuple[int, int]':
+    def get_position(self) -> 'tuple[int, int]':
         return (self.rect.x, self.rect.y)
 
-    def getDim(self) -> 'tuple[int, int]':
+    def get_dimension(self) -> 'tuple[int, int]':
         return (self.rect.width, self.rect.height)
 
-    def getImgScale(self) -> list:
+    def get_img_scale(self) -> list:
         return self.__image_scale
     
     
     # Setters
-    def setImage(self, img: pygame.Surface):
+    def set_image(self, img: pygame.Surface):
         self.image = img
 
-    def setPos(self, pos: 'tuple[int, int]'):
+    def set_position(self, pos: 'tuple[int, int]'):
         self.rect.x = pos[0]
         self.rect.y = pos[1]
 
-    def setDim(self, dim: 'tuple[int, int]'):
+    def get_dimension(self, dim: 'tuple[int, int]'):
         self.rect.width = dim[0]
         self.rect.height = dim[1]
 
-    def stImgScale(self, img_scale):
+    def set_img_scale(self, img_scale):
         self.__image_scale = img_scale

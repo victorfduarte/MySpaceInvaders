@@ -1,3 +1,4 @@
+import pygame.time
 from GameSystem import GSystem
 from Interfaces.screen_interface import ScreenInterface
 
@@ -11,7 +12,6 @@ class ScreenBase(ScreenInterface):
     Ela disponibiliza também, os seguintes métodos:\n
         get_name() -> str\n
         get_gSystem() -> GSystem
-        stop_running() -> None
     '''
     
     def __init__(self, name: str, game_system: GSystem):
@@ -38,15 +38,19 @@ class ScreenBase(ScreenInterface):
         '''
         self.setup()
 
+        clock = pygame.time.Clock()
+        framerate = self.__game_system.DISPLAY.getFramerate()
         self.__running = True
+
         
         while self.__running:
+            dt = clock.tick(framerate)
             # Inputs
             self.__game_system.INPUT.__listen__()
             # Colisões
             self.__game_system.COLLISIONS.__check__()
             # Timer
-            self.__game_system.TIMER.__update__()
+            self.__game_system.TIMER.__update__(dt)
             # Update Display
-            self.__game_system.DISPLAY.__drawAll__()
             self.__game_system.DISPLAY.__update__()
+            # Mantem o Framerate

@@ -3,7 +3,7 @@ A interface que possibilita os objetos poderem ser colididos
 '''
 
 class CollisionInterface:
-    def get_content(self) -> 'list[CollisionInterface]':
+    def get_collision_content(self) -> 'list[CollisionInterface]':
         '''*Abstract Function*\n
         Retorna o conteúdo para verificar a colisão\n
         Caso o objeto seja simples, retorna uma lista contendo ele mesmo. Caso o objeto

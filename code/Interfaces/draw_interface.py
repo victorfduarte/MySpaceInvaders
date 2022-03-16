@@ -5,7 +5,7 @@ A interface que possibilita os objetos poderem ser desenhados
 from pygame import Surface
 
 class DrawInterface:
-    def get_children(self) -> 'list[DrawInterface]':
+    def get_draw_content(self) -> 'list[DrawInterface]':
         '''*Abstract Function*\n
         Retorna a sua lista dos objetos a serem desenhados na tela\n
         Caso o objeto seja simples, retorna uma lista contendo ele mesmo. Caso o objeto
@@ -14,14 +14,26 @@ class DrawInterface:
         '''
         pass
 
-    def get_content(self) -> Surface:
+    def get_image(self) -> Surface:
         '''*Abstract Function*\n
         Retorna o conteúdo do objeto a ser desenhado na tela
+        '''
+        pass
+
+    def set_image(self, img: Surface) -> None:
+        '''*Abstract Function*\n
+        Seta o conteúdo do objeto a ser desenhado na tela
         '''
         pass
 
     def get_position(self) -> 'tuple[int, int]':
         '''*Abstract Function*\n
         Retorna a posição X, Y do objeto
+        '''
+        pass
+
+    def set_position(self, pos: 'tuple[int, int]') -> None:
+        '''*Abstract Function*\n
+        Seta a posição X, Y do objeto
         '''
         pass
