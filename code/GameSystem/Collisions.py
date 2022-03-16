@@ -2,8 +2,12 @@
 Este é o módulo do GameSystem que trabalha as colisões entre objetos
 '''
 
+from Interfaces.collision_interface import CollisionInterface
+
+'''
 from ..Sprites.Bases.sprite import MySprite
 from ..Sprites.Bases.group_sprites import MyGroupSprites
+'''
 
 class Collisions:
     '''Classe para fazer funcionar os tempos do jogo. Cria um objeto para ser único em
@@ -18,81 +22,43 @@ class Collisions:
     lista de grupo de sprites que podem se colidir\n
     '''
     def __init__(self):
-        self.__sprites: list[MySprite] = []
-        self.__groups: list[MyGroupSprites] = [] 
+        self.__objects: list[CollisionInterface] = []
 
 
-    def add_sprite(self, sprite: MySprite):
-        if sprite not in self.__sprites:
-            self.__sprites.append(sprite)
+    def add_object(self, obj: CollisionInterface):
+        for content in obj.get_content():
+            if content not in self.__objects:
+                self.__objects.append(content)
     
-    def remove_sprite(self, sprite: MySprite):
-        if sprite in self.__sprites:
-            self.__sprites.remove(sprite)
-    
-    def add_group_sprites(self, group: MyGroupSprites):
-        if group not in self.__groups:
-            self.__groups.append(group)
-    
-    def remove_group_sprites(self, group: MyGroupSprites):
-        if group in self.__groups:
-            self.__groups.remove(group)
+    def remove_object(self, obj: CollisionInterface):
+        for content in obj.get_content():
+            if content in self.__objects:
+                self.__objects.remove(content)
 
 
-    def __sprites__(self):
-        '''Verifica se há colisão entre os Sprites cadastrados\n
+    def __check__(self):
+        '''Verifica se há colisão entre os objetos cadastrados\n
         Se houver, chama a função on_collision() de cada um\n
         **Esta função faz parte do sistema e não deve ser chamada**
         '''
-        for idx1 in range(len(self.__sprites)):
-            for idx2 in range(idx1+1, len(self.__sprites)):
-                if self.__collison__(self.__sprites[idx1], self.__sprites[idx2]):
-                    self.__sprites[idx1].on_collision(self.__sprites[idx2])
-                    self.__sprites[idx2].on_collision(self.__sprites[idx1])
-        pass
+        for idx1 in range(len(self.__objects)):
+            for idx2 in range(idx1+1, len(self.__objects)):
+                if self.__collison__(self.__objects[idx1], self.__objects[idx2]):
+                    self.__objects[idx1].on_collision(self.__objects[idx2])
+                    self.__objects[idx2].on_collision(self.__objects[idx1])
 
-    def __groups__(self):
-        '''Vefifica se há colisão entre os Sprites dos Grupos de Sprites cadastrados
-        Se houver, chama a função on_collision() de cada Sprite e do Grupo\n
+
+    def __collison__(self, obj1: CollisionInterface, obj2: CollisionInterface) -> bool:
+        '''Verifica se dois objetos estão se colidindo\n
         **Esta função faz parte do sistema e não deve ser chamada**
         '''
-        for idx1 in range(len(self.__groups)):
-            for idx2 in range(idx1+1, len(self.__groups)):
-                gp_collision = False
-                for sprite1 in self.__groups[idx1].sprites():
-                    for sprite2 in self.__groups[idx2].sprites():
-                        if self.collison(sprite1, sprite2):
-                            sprite1.on_collision(sprite2)
-                            sprite2.on_collision(sprite1)
-                            gp_collision = True
-                if gp_collision:
-                    self.__groups[idx1].on_collision(self.__groups[idx2])
-                    self.__groups[idx2].on_collision(self.__groups[idx1])
+        (x1, y1) = obj1.get_position()
+        (w1, h1) = obj1.get_dimension()
+        (x2, y2) = obj2.get_position()
+        (w2, h2) = obj2.get_dimension()
 
-    def __sprite_groups__(self):
-        '''Verifica se há colisão entre Sprites com Grupos de Sprites\n
-        Se houver, chama a função on_collision() de cada Sprite\n
-        **Esta função faz parte do sistema e não deve ser chamada**
-        '''
-        for sprite1 in self.__sprites:
-            for group in self.__groups:
-                gp_collision = False
-                for sprite2 in group.sprites():
-                    if self.collison(sprite1, sprite2):
-                        sprite1.on_collision(sprite2)
-                        sprite2.on_collision(sprite1)
-                        gp_collision = True
-                if gp_collision:
-                    group.on_collision(sprite1)
-
-    def __collison__(self, obj1: MySprite, obj2: MySprite) -> bool:
-        '''Verifica se dois Sprites estão se colidindo\n
-        **Esta função faz parte do sistema e não deve ser chamada**
-        '''
-        if self.axes_collision(obj1.rect.x, obj1.rect.width,
-        obj2.rect.x, obj2.rect.width):
-            return self.axes_collision(obj1.rect.y, obj1.rect.height,
-            obj2.rect.y, obj2.rect.height)
+        if self.__axes_collision__(x1, w1, x2, w2):
+            return self.__axes_collision__(y1, h1, y2, h2)
         return False
 
     def __axes_collision__(self, pt1: int, d1: int, pt2: int, d2: int) -> bool:

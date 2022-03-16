@@ -20,7 +20,7 @@ class Input:
         self.__quit: list[function] = []
     
 
-    def add_keyboard_listener(self, func: function, k_event: int, code: int = ANY):
+    def add_keyboard_listener(self, func: 'function', k_event: int, code: int = ANY):
         '''Chama func quando ocorrer o evento k_event com a chave code. Se code for ANY,
         então chama func sempre que ocorrer o evento k_event'''
         if (k_event, code) in self.__keyboard:
@@ -29,7 +29,7 @@ class Input:
         else:
             self.__keyboard[(k_event, code)] = [func]
     
-    def remove_keyboard_listener(self, func: function, k_event: int, code: int = ANY):
+    def remove_keyboard_listener(self, func: 'function', k_event: int, code: int = ANY):
         '''Remove a ligação entre func para com o par k_event e code\n
         Se a ligação não existir, não faz nada'''
         if (k_event, code) in self.__keyboard:
@@ -40,12 +40,12 @@ class Input:
                     self.__keyboard[(k_event, code)].remove(func)
     
 
-    def add_quit_listener(self, func: function):
+    def add_quit_listener(self, func: 'function'):
         '''Chama func quando ocorrer o evento QUIT'''
         if func not in self.__quit:
             self.__quit.append(func)
     
-    def remove_quit_listener(self, func: None):
+    def remove_quit_listener(self, func: 'function'):
         '''Remove a ligação entre func para com o evento QUIT\n
         Se a ligação não existir, não faz nada'''
         if func in self.__quit:

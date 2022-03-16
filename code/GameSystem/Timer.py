@@ -18,7 +18,7 @@ class Timer:
         self.DELTA = pygame.time.get_ticks()
     
 
-    def add_clock(self, time: int, func: function):
+    def add_clock(self, time: int, func: 'function'):
         '''Chama a função a cada time ms'''
         for clock in self.__clocks.keys():
             if clock.getTime() == time:
@@ -28,12 +28,12 @@ class Timer:
             clock = Clock(self.__pg, time)
             self.__clocks[clock] = [func]
 
-    def add_everytime_clock(self, func: function):
+    def add_everytime_clock(self, func: 'function'):
         '''Chama a função a todo o momento'''
         if func not in self.__objs_update:
             self.__objs_update.append(func)
     
-    def remove_clock(self, func: function):
+    def remove_clock(self, func: 'function'):
         '''Remove a função da lista'''
         if func in self.__objs_update:
             self.__objs_update.remove(func)

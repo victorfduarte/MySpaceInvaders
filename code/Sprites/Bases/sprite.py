@@ -1,7 +1,7 @@
 import pygame
 import pygame.image
 from pygame.sprite import Sprite
-from sprite_interface import SpriteInterface
+from .sprite_interface import SpriteInterface
 
 class MySprite(Sprite, SpriteInterface):
     def __init__(self, name, image_path: str):
@@ -34,8 +34,8 @@ class MySprite(Sprite, SpriteInterface):
     
     
     # Setters
-    def setImage(self, img_path: str):
-        self.image = pygame.image.load(img_path)
+    def setImage(self, img: pygame.Surface):
+        self.image = img
 
     def setPos(self, pos: 'tuple[int, int]'):
         self.rect.x = pos[0]

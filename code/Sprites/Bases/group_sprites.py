@@ -1,7 +1,7 @@
 import pygame
 import pygame.image
 from pygame.sprite import Group
-from sprite import MySprite
+from .sprite import MySprite
 
 
 class MyGroupSprites(Group):

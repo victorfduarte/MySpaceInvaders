@@ -2,8 +2,7 @@
 Este é o módulo do GameSystem que trabalha as colisões entre objetos
 '''
 
-from ..Sprites.Bases.group_sprites import MyGroupSprites
-from ..Sprites.Bases.sprite import MySprite
+from Interfaces.draw_interface import DrawInterface
 
 import pygame
 import pygame.display
@@ -24,26 +23,19 @@ class Display:
         self.__width = 0
         self.__height = 0
         self.__display: pygame.Surface = None
-        self.__sprites: list[MySprite] = []
-        self.__group_sprites: list[MyGroupSprites] = []
+        self.__objects: list[DrawInterface] = []
     
 
-    def add_sprite(self, sprite: MySprite):
-        if sprite not in self.__sprites:
-            self.__sprites.append(sprite)
+    def add_object(self, obj: DrawInterface):
+        for child in obj.get_children():
+            if child not in self.__objects:
+                self.__objects.append(obj)
     
-    def remove_sprite(self, sprite: MySprite):
-        if sprite in self.__sprites:
-            self.__sprites.remove(sprite)
-    
-    def add_group_sprites(self, group):
-        if group not in self.__group_sprites:
-            self.__group_sprites.append(group)
-    
-    def remove_group_sprites(self, group):
-        if group in self.__group_sprites:
-            self.__group_sprites.remove(group)
-    
+    def remove_object(self, obj: DrawInterface):
+        for child in obj.get_children:
+            if child in self.__objects:
+                self.__objects.remove(obj)
+
 
     def getWidth(self) -> int:
         return self.__width
@@ -65,12 +57,8 @@ class Display:
         '''Desenha os sprites cadastrados na tela\n
         **Esta função faz parte do sistema e não deve ser chamada**
         '''
-        for sprite in self.__sprites:
-            self.__display.blit(sprite.getImage(), sprite.getPos())
-        
-        for group in self.__group_sprites:
-            for sprite in group.sprites():
-                self.__display.blit(sprite.getImage(), sprite.getPos())
+        for obj in self.__objects:
+            self.__display.blit(obj.get_content(), obj.get_position())
 
     def __update__(self):
         '''Atualiza a tela, desenhando tudo o que deve aparecer\n
