@@ -44,7 +44,7 @@ class ScreenBase(ScreenInterface):
 
         
         while self.__running:
-            dt = clock.tick(framerate)
+            dt = clock.tick(framerate) / 1000
             # Inputs
             self.__game_system.INPUT.__listen__()
             # Colisões

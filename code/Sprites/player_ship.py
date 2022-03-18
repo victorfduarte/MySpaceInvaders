@@ -3,10 +3,12 @@ from Sprites.bases.sprite import MySprite
 from Sprites.bases.two_directions import TwoDirection
 
 
-class PlayerShip(MySprite, TwoDirection):
+class PlayerShip(MySprite):
     def __init__(self, initial_lives = 3):
         super().__init__('Player', 'resources/images/ship.png')
-        self.twoDirectionsetup(350)
+
+        twodirection = TwoDirection(self, 150, 'y')
+        self.add_behavior(twodirection)
         
         self.__double_shoot = False
         self.__lives = initial_lives
