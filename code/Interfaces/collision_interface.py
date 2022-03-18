@@ -12,10 +12,9 @@ class CollisionInterface:
         '''
         pass
 
-    def on_collision(self, obj: 'CollisionInterface') -> None:
+    def set_collision_content(self, content: 'list[CollisionInterface]') -> None:
         '''*Abstract Function*\n
-        Método que é chamado toda vez que o objeto se colide. Recebe como argumento o
-        objeto com o qual a colisão ocorreu
+        Seta o conteúdo para verificar a colisão\n
         '''
         pass
 
@@ -28,6 +27,13 @@ class CollisionInterface:
     def get_dimension(self) -> 'tuple[int, int]':
         '''*Abstract Function*\n
         Retorna a largura e a altura do objeto
+        '''
+        pass
+
+    def on_collision(self, obj: 'CollisionInterface') -> None:
+        '''*Abstract Function*\n
+        Método que é chamado toda vez que o objeto se colide. Recebe como argumento o
+        objeto com o qual a colisão ocorreu
         '''
         pass
 

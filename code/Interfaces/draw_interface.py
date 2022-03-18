@@ -14,15 +14,9 @@ class DrawInterface:
         '''
         pass
 
-    def get_image(self) -> Surface:
+    def set_draw_content(self, content: 'list[DrawInterface]'):
         '''*Abstract Function*\n
-        Retorna o conteúdo do objeto a ser desenhado na tela
-        '''
-        pass
-
-    def set_image(self, img: Surface) -> None:
-        '''*Abstract Function*\n
-        Seta o conteúdo do objeto a ser desenhado na tela
+        Seta a sua lista dos objetos a serem desenhados na tela\n
         '''
         pass
 
@@ -32,8 +26,20 @@ class DrawInterface:
         '''
         pass
 
-    def set_position(self, pos: 'tuple[int, int]') -> None:
+    def get_dimension(self) -> 'tuple[int, int]':
         '''*Abstract Function*\n
-        Seta a posição X, Y do objeto
+        Retorna a largura e a altura do objeto
+        '''
+        pass
+
+    def get_image(self) -> Surface:
+        '''*Abstract Function*\n
+        Retorna o conteúdo do objeto a ser desenhado na tela
+        '''
+        pass
+
+    def set_image(self, img: Surface) -> None:
+        '''*Abstract Function*\n
+        Seta o conteúdo do objeto a ser desenhado na tela
         '''
         pass

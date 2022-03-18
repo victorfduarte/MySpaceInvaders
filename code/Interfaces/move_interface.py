@@ -1,24 +1,12 @@
-class MoveInterface:   
-    def __move__(self, delta) -> None:
-        pass
-
-    def __move_right__(self) -> None:
-        pass
-
-    def __move_left__(self) -> None:
-        pass
-
-    def __move_up__(self) -> None:
-        pass
-
-    def __move_down__(self) -> None:
-        pass
-
-    def __stop_move__(self) -> None:
-        pass
-
+class MoveInterface: 
     def get_position(self) -> 'tuple[int, int]':
+        '''*Abstract Function*\n
+        Retorna a posição X, Y do objeto
+        '''
         pass
 
     def set_position(self, pos: 'tuple[int, int]') -> None:
+        '''*Abstract Function*\n
+        Seta a posição X, Y do objeto
+        '''
         pass
