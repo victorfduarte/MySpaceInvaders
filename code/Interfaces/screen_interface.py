@@ -12,17 +12,15 @@ class ScreenInterface():
     def setup(self):
         '''*Abstract Function*\n
         Esta função será executada quando a tela aparecer. Será a primeira função a ser
-        executada na tela. Nela, serão ditos quais objetos aparecerão na tela, seus
-        Listeners de input, Timers, e quais objetos podem colidir'''
+        executada na tela. Nela, serão ditos quais objetos aparecerão na tela, e outras
+        especificações se necessário'''
         pass
 
     def leave(self):
         '''*Abstract Function*\n
         Este método será executada antes da tela desaparecer. Será o ultimo a ser
-        executada na tela. Nele, será desfeito tudo o que o método setup() fez. Depois,
-        chamará o seu método stop_running() para parar a sua execução. Por fim, ele pode
-        chamar a método setScreen(name) de seu manager para mudar de tela, ou chamar a
-        método quit() também do seu manager para fechar o jogo'''
+        executada na tela. Nele, será desfeito tudo o que o método setup() fez. Será
+        chamado sempre que o jogo mudar de tela e quando ele for fechado'''
         pass
 
 

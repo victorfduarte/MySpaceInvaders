@@ -5,8 +5,8 @@ class MoveInterface:
         '''
         pass
 
-    def set_position(self, pos: 'tuple[int, int]') -> None:
+    def move(self, pos: 'tuple[int, int]') -> None:
         '''*Abstract Function*\n
-        Seta a posição X, Y do objeto
-        '''
+        Move o objeto para a posição especificada. Pode implementar verificações que
+        permitam ou não a movimentação.'''
         pass

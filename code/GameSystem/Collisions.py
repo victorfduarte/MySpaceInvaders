@@ -4,22 +4,13 @@ Este é o módulo do GameSystem que trabalha as colisões entre objetos
 
 from Interfaces.collision_interface import CollisionInterface
 
-'''
-from ..Sprites.Bases.sprite import MySprite
-from ..Sprites.Bases.group_sprites import MyGroupSprites
-'''
-
 class Collisions:
     '''Classe para fazer funcionar os tempos do jogo. Cria um objeto para ser único em
     todo o jogo. Possui as seguintes funções:\n
-    add_sprite(sprite: MySprite) -> None: Adiciona o sprite à lista de sprites que podem
-    se colidir\n
-    remove_sprite(sprite: MySprite) -> None: Remove o sprite da lista de sprites que
+    add_object(obj: CollisionInterface) -> None: Adiciona o objeto à lista de objetos que
     podem se colidir\n
-    add_group_sprites(group: MyGroupSprite) -> None: Adiciona o grupo de sprites à lista
-    de grupo de sprites que podem se colidir\n
-    remove_group_sprites(sprite: MyGroupSprite) -> None: Remove o grupo de sprites de
-    lista de grupo de sprites que podem se colidir\n
+    remove_object(obj: CollisionInterface) -> None: Remove o objeto da lista de objetos
+    que podem se colidir\n
     '''
     def __init__(self):
         self.__objects: list[CollisionInterface] = []

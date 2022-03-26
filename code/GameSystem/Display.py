@@ -11,14 +11,13 @@ import pygame.time
 class Display:
     '''Classe para fazer funcionar a tela do jogo. Cria um objeto para ser único em
     todo o jogo. Possui as seguintes funções:\n
-    add_sprite(sprite: MySprite) -> None: Adiciona o sprite à lista de sprites a serem
-    renderizados\n
-    remove_sprite(sprite: MySprite) -> None: Remove o sprite da lista de sprites a serem
-    renderizados\n
-    add_group_sprites(group: MyGroupSprite) -> None: Adiciona o grupo de sprites à lista
-    de grupo de sprites a serem renderizados\n
-    remove_group_sprites(sprite: MyGroupSprite) -> None: Remove o grupo de sprites de
-    lista de grupo de sprites a serem renderizados\n
+    add_object(obj: DrawInterface) -> None: Adiciona o objeto à lista de objetos a
+    serem renderizados\n
+    remove_object(obj: DrawInterface) -> None: Remove o objeto da lista de objetos a
+    serem renderizados\n
+    getWidth() -> int: Retorna a largura do campo
+    getHeight() -> int: Retorna a altura do campo
+    getFramerate() -> int: Retorna o framerate do jogo
     '''
     def __init__(self):
         self.__width = 0
@@ -36,15 +35,17 @@ class Display:
     
     def remove_object(self, obj: DrawInterface):
         '''Deixa de desenhar o objeto na tela'''
-        for child in obj.get_draw_content:
+        for child in obj.get_draw_content():
             if child in self.__objects:
                 self.__objects.remove(obj)
 
 
     def getWidth(self) -> int:
+        '''Retorna a largura da Tela'''
         return self.__width
     
     def getHeight(self) -> int:
+        '''Retorna a altura da Tela'''
         return self.__height
     
     def getFramerate(self) -> int:

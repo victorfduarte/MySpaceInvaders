@@ -8,10 +8,16 @@ import pygame.event
 class Input:
     '''Classe para fazer funcionar os inputs do jogo. Cria um objeto para ser único em
     todo o jogo. Possui as seguintes funções:\n
-    add_keyboard_listener(func: function, k_event: int, code: int = ANY) -> None: Recebe
-    uma função e a chama sempre que ocorrer a combinação k_event e code\n
+    add_keyboard_listener(func: function, k_event: int, code: int = ANY) -> None:
+    Recebe uma função e a chama sempre que ocorrer a combinação k_event e code\n
     remove_keyboard_listener(func: function, k_event: int, code: int = ANY) -> None:
     Desfaz a conexão entre a função e a combinação k_event e code\n
+    add_quit_listener(func: function, k_event: int, code: int = ANY) -> None:
+    Recebe uma função e a chama sempre que ocorrer uma requisição de fechamento da
+    janela principal do jogo\n
+    remove_quit_listener(func: function, k_event: int, code: int = ANY) -> None:
+    Desfaz a conexão entre a função e a requisição de fechamento da
+    janela principal do jogo\n
     '''
     ANY = 0
 
