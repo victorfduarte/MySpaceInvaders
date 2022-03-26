@@ -6,8 +6,8 @@ from Interfaces.sprite_interface import SpriteInterface
 
 class TwoDirection(SpriteBehaviorInterface):
     def __init__(self, parent: SpriteInterface, speed: int, axel = 'x'):
-        '''Recebe a velocidade, em px/s, o eixo, (X ou Y), e se deve rotacionar a
-        imagem ou não 
+        '''Recebe o Sprite pai, a velocidade, em px/s, o eixo, (X ou Y)\n
+        Faz a movimentação do Sprite utilizando o método move(pos) do próprio Sprite
         '''
         self.__name = 'TwoDirections'
         self.__parent = parent
@@ -84,23 +84,24 @@ class TwoDirection(SpriteBehaviorInterface):
 
     def __move__(self, delta):
         deslocamento = self.__speed * delta
+        self.__x, self.__y = self.__parent.get_position()
 
         if self.__direction == self.RIGHT:
             self.__x += deslocamento
-            self.__parent.set_position((self.__x, self.__y))
+            self.__parent.move((self.__x, self.__y))
 
         elif self.__direction == self.LEFT:
             self.__x -= deslocamento
-            self.__parent.set_position((self.__x, self.__y))
+            self.__parent.move((self.__x, self.__y))
 
         elif self.__direction == self.UP:
             self.__y -= deslocamento
-            self.__parent.set_position((self.__x, self.__y))
+            self.__parent.move((self.__x, self.__y))
 
         elif self.__direction == self.DOWN:
             self.__y += deslocamento
-            self.__parent.set_position((self.__x, self.__y))
-
+            self.__parent.move((self.__x, self.__y))
+            
 
     def __move_right__(self):
         self.__direction = self.RIGHT
