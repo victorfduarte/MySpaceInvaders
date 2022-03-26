@@ -1,5 +1,6 @@
 from GameSystem import gSystem
 import pygame.image
+import pygame.transform
 from pygame import Surface
 from Interfaces.collision_interface import CollisionInterface
 from Interfaces.draw_interface import DrawInterface
@@ -15,24 +16,32 @@ class MySprite(SpriteInterface):
         self.__draw_content: list[DrawInterface] = [self]
         self.__collision_content: list[CollisionInterface] = [self]
 
-        self.__image = pygame.image.load(image_path)
+        self.__image_base = pygame.image.load(image_path)
+        self.__image = self.__image_base
         self.__rect = self.__image.get_rect()
         self.__image_scale = [0, 0]
+        self.__angle = 0
 
         gSystem.DISPLAY.add_object(self)
         gSystem.COLLISIONS.add_object(self)
     
 
-    def on_collision(self, obj: 'CollisionInterface') -> None:
+    def on_collision(self, obj: 'CollisionInterface', *args) -> None:
         '''*Abstract Function*\n
         Método que é chamado toda vez que o objeto se colide. Recebe como argumento o
         objeto com o qual a colisão ocorreu
         '''
         pass
+
+    def move(self, pos: 'tuple[int, int]', *args) -> None:
+        '''Move o objeto para a posição especificada. Pode implementar verificações que
+        permitam ou não a movimentação. Vem com uma implementação padrão que somente
+        chama o método set_position(pos), porém pode ser reimplementado'''
+        self.set_position(pos)
     
 
     # Sprite Interface
-    def kill(self):
+    def kill(self, *args):
         '''Método a ser executado para destruir um Sprite'''
         gSystem.DISPLAY.remove_object(self)
         gSystem.COLLISIONS.remove_object(self)
@@ -100,11 +109,15 @@ class MySprite(SpriteInterface):
     def get_image(self) -> Surface:
         '''Retorna o conteúdo do objeto a ser desenhado na tela
         '''
-        return self.__image
+        return self.__image_base
+    
+    def get_angle(self):
+        '''Retorna o ângulo do objeto emg graus'''
+        return self.__angle
 
 
     # Setters
-    def set_position(self, pos: 'tuple[float, float]') -> None:
+    def set_position(self, pos: 'tuple[int, int]') -> None:
         '''Seta a posição X, Y do objeto
         '''
         self.__rect.x, self.__rect.y = pos
@@ -117,5 +130,10 @@ class MySprite(SpriteInterface):
     def set_image(self, img: Surface) -> None:
         '''Seta o conteúdo do objeto a ser desenhado na tela
         '''
-        self.__image = img
+        self.__image = pygame.transform.rotate(self.__image_base, self.__angle)
+    
+    def set_angle(self, angle: int):
+        '''Seta o ângulo do objeto em graus'''
+        self.__angle = angle
+        self.__image = pygame.transform.rotate(self.__image_base, angle)
 
