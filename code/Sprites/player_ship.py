@@ -8,7 +8,7 @@ from .bala import Bala
 
 class PlayerShip(MySprite):
     def __init__(self, pos: 'tuple[int, int]', initial_lives = 3):
-        super().__init__('Player', 'resources/images/ship.png')
+        super().__init__('Player', 'resources/images/nave.png')
         self.set_position(pos)
 
         # Comportamentos
@@ -19,11 +19,13 @@ class PlayerShip(MySprite):
         self.add_behavior(self.bound_to_layout)
 
         # Propiedades
-        self.__double_shoot = False
+        self.__double_shoot = True
         self.__lives = initial_lives
         self.can_shoot = True
 
-        self.point1 = (self.get_dimension()[0] / 2, 0)
+        self.point1 = (24, -5)
+        self.point2 = (6, 13)
+        self.point3 = (42, 13)
 
         # Eventos
         gSystem.INPUT.add_keyboard_listener(self.atirar, pg.KEYDOWN, pg.K_SPACE)
@@ -39,11 +41,25 @@ class PlayerShip(MySprite):
     def atirar(self):
         if self.can_shoot:
             x, y = self.get_position()
-            balax = self.point1[0] + x
-            balay = self.point1[1] + y
 
-            Bala((balax, balay))
-            print('Atirando')
+            if not self.__double_shoot:
+                balax = self.point1[0] + x
+                balay = self.point1[1] + y
+
+                Bala((balax, balay))
+                print('Atirando')
+            
+            else:
+                bala1x = self.point2[0] + x
+                bala1y = self.point2[1] + y
+                bala2x = self.point3[0] + x
+                bala2y = self.point3[1] + y
+
+                Bala((bala1x, bala1y))
+                Bala((bala2x, bala2y))
+
+                print('Atirando Duplo')
+
 
             self.can_shoot = False
 
