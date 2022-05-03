@@ -43,6 +43,7 @@ class MySprite(SpriteInterface):
     # Sprite Interface
     def kill(self, *args):
         '''Método a ser executado para destruir um Sprite'''
+        print('kill')
         gSystem.DISPLAY.remove_object(self)
         gSystem.COLLISIONS.remove_object(self)
         for behavior in self.__behaviors:

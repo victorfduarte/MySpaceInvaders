@@ -1,5 +1,6 @@
-# fazer todas as importações necessárias
+# Fazer todas as importações necessárias
 import pygame
+import pygame.image
 from GameSystem import gSystem
 from Interfaces.screen_interface import ScreenInterface
 from Screens.screen_jogo import ScreenJogo
